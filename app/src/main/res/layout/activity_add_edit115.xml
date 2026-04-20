@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="20dp"
+    android:background="#F5F5F5">
+
+    <TextView
+        android:id="@+id/tvTitle115"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Form Transaksi"
+        android:textSize="22sp"
+        android:textStyle="bold"
+        android:textColor="#333333"
+        android:layout_marginBottom="24dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Kategori"
+        android:textSize="14sp"
+        android:textColor="#666666"/>
+    <EditText
+        android:id="@+id/etKategori115"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Contoh: Makan, Transport"
+        android:layout_marginBottom="16dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Nominal"
+        android:textSize="14sp"
+        android:textColor="#666666"/>
+    <EditText
+        android:id="@+id/etNominal115"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="0"
+        android:inputType="numberDecimal"
+        android:layout_marginBottom="16dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Keterangan"
+        android:textSize="14sp"
+        android:textColor="#666666"/>
+    <EditText
+        android:id="@+id/etKeterangan115"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Catatan tambahan"
+        android:layout_marginBottom="16dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Tanggal"
+        android:textSize="14sp"
+        android:textColor="#666666"/>
+    <EditText
+        android:id="@+id/etTanggal115"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="YYYY-MM-DD"
+        android:layout_marginBottom="32dp"/>
+
+    <Button
+        android:id="@+id/btnSave115"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Simpan Transaksi"
+        android:textAllCaps="false"
+        android:layout_marginBottom="8dp"/>
+
+    <Button
+        android:id="@+id/btnDelete115"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Hapus Data"
+        android:textAllCaps="false"
+        android:backgroundTint="#D32F2F"
+        android:visibility="gone"/>
+
+</LinearLayout>
