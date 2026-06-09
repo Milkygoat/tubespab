@@ -21,7 +21,9 @@ class AuthRepository0115(private val api0115: SupabaseApi0115, context0115: Cont
                 userId0115?.let { prefs0115.edit().putString("user_id0115", it).apply() }
                 Result.success(auth0115)
             } else {
-                Result.failure(Exception("signup_failed0115"))
+                val errBody0115 = resp0115.errorBody()?.string()
+                val msg0115 = errBody0115?.takeIf { it.isNotBlank() } ?: "signup_failed0115"
+                Result.failure(Exception(msg0115))
             }
         } catch (e0115: Exception) {
             Result.failure(e0115)
@@ -38,7 +40,9 @@ class AuthRepository0115(private val api0115: SupabaseApi0115, context0115: Cont
                 userId0115?.let { prefs0115.edit().putString("user_id0115", it).apply() }
                 Result.success(auth0115)
             } else {
-                Result.failure(Exception("signin_failed0115"))
+                val errBody0115 = resp0115.errorBody()?.string()
+                val msg0115 = errBody0115?.takeIf { it.isNotBlank() } ?: "signin_failed0115"
+                Result.failure(Exception(msg0115))
             }
         } catch (e0115: Exception) {
             Result.failure(e0115)
@@ -51,4 +55,3 @@ class AuthRepository0115(private val api0115: SupabaseApi0115, context0115: Cont
     fun getUserId0115(): String? = prefs0115.getString("user_id0115", null)
     fun getRefreshToken0115(): String? = prefs0115.getString("refresh_token0115", null)
 }
-
