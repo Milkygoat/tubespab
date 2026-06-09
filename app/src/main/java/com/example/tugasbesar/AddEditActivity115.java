@@ -1,12 +1,15 @@
 package com.example.tugasbesar;
 
+import android.app.DatePickerDialog;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
+import java.util.Calendar;
 
 public class AddEditActivity115 extends AppCompatActivity {
     private EditText etKategori115, etNominal115, etKeterangan115, etTanggal115;
@@ -29,6 +32,14 @@ public class AddEditActivity115 extends AppCompatActivity {
         btnDelete115 = findViewById(R.id.btnDelete115);
         tvTitle115 = findViewById(R.id.tvTitle115);
 
+        etTanggal115.setFocusable(false);
+        etTanggal115.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v115) {
+                showDatePickerDialog115();
+            }
+        });
+
         userId115 = getIntent().getIntExtra("USER_ID115", -1);
         if (getIntent().hasExtra("TRANS_ID115")) {
             transId115 = getIntent().getIntExtra("TRANS_ID115", -1);
@@ -38,11 +49,20 @@ public class AddEditActivity115 extends AppCompatActivity {
             etTanggal115.setText(getIntent().getStringExtra("TANGGAL115"));
             tvTitle115.setText("Edit Transaksi");
             btnDelete115.setVisibility(View.VISIBLE);
+        } else {
+            Calendar c115 = Calendar.getInstance();
+            String today115 = c115.get(Calendar.YEAR) + "-" + (c115.get(Calendar.MONTH) + 1) + "-" + c115.get(Calendar.DAY_OF_MONTH);
+            etTanggal115.setText(today115);
         }
 
         btnSave115.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v115) {
+                if(etKategori115.getText().toString().isEmpty() || etNominal115.getText().toString().isEmpty()) {
+                    Toast.makeText(AddEditActivity115.this, "Kategori dan Nominal harus diisi", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                
                 String kategori115 = etKategori115.getText().toString();
                 double nominal115 = Double.parseDouble(etNominal115.getText().toString());
                 String keterangan115 = etKeterangan115.getText().toString();
@@ -67,5 +87,21 @@ public class AddEditActivity115 extends AppCompatActivity {
                 finish();
             }
         });
+    }
+
+    private void showDatePickerDialog115() {
+        final Calendar c115 = Calendar.getInstance();
+        int year115 = c115.get(Calendar.YEAR);
+        int month115 = c115.get(Calendar.MONTH);
+        int day115 = c115.get(Calendar.DAY_OF_MONTH);
+
+        DatePickerDialog datePickerDialog115 = new DatePickerDialog(this,
+                new DatePickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(DatePicker view115, int year115, int monthOfYear115, int dayOfMonth115) {
+                        etTanggal115.setText(year115 + "-" + (monthOfYear115 + 1) + "-" + dayOfMonth115);
+                    }
+                }, year115, month115, day115);
+        datePickerDialog115.show();
     }
 }

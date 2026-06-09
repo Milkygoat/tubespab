@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/loginFragment0115">
+
+    <fragment
+        android:id="@+id/loginFragment0115"
+        android:name="com.example.tugasbesar.ui.auth.LoginFragment0115"
+        android:label="Login">
+        <action
+            android:id="@+id/action_login_to_register"
+            app:destination="@id/registerFragment0115" />
+        <action
+            android:id="@+id/action_login_to_tasks"
+            app:destination="@id/taskListFragment0115" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/registerFragment0115"
+        android:name="com.example.tugasbesar.ui.auth.RegisterFragment0115"
+        android:label="Register">
+        <action
+            android:id="@+id/action_register_to_tasks"
+            app:destination="@id/taskListFragment0115" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/taskListFragment0115"
+        android:name="com.example.tugasbesar.ui.tasks.TaskListFragment0115"
+        android:label="Tasks">
+        <action
+            android:id="@+id/action_tasks_to_taskDetail"
+            app:destination="@id/taskDetailFragment0115" />
+        <action
+            android:id="@+id/action_tasks_to_events"
+            app:destination="@id/eventListFragment0115" />
+        <action
+            android:id="@+id/action_tasks_to_calendar"
+            app:destination="@id/calendarFragment0115" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/taskDetailFragment0115"
+        android:name="com.example.tugasbesar.ui.tasks.TaskDetailFragment0115"
+        android:label="Task Detail" />
+
+    <fragment
+        android:id="@+id/eventListFragment0115"
+        android:name="com.example.tugasbesar.ui.events.EventListFragment0115"
+        android:label="Events">
+        <action
+            android:id="@+id/action_events_to_eventDetail"
+            app:destination="@id/eventDetailFragment0115" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/eventDetailFragment0115"
+        android:name="com.example.tugasbesar.ui.events.EventDetailFragment0115"
+        android:label="Event Detail" />
+
+    <fragment
+        android:id="@+id/calendarFragment0115"
+        android:name="com.example.tugasbesar.ui.calendar.CalendarFragment0115"
+        android:label="Calendar" />
+
+</navigation>
+

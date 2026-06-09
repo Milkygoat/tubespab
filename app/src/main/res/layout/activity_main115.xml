@@ -13,6 +13,7 @@
         android:textSize="22sp"
         android:textStyle="bold"
         android:textColor="#333333"
+        android:layout_marginTop="8dp"
         android:layout_marginBottom="16dp"/>
 
     <LinearLayout
@@ -21,13 +22,14 @@
         android:orientation="horizontal"
         android:gravity="center_vertical"
         android:layout_marginBottom="16dp"
-        android:padding="8dp"
+        android:padding="12dp"
         android:background="@android:drawable/editbox_background">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Filter Kategori: "
+            android:text="Filter: "
+            android:textStyle="bold"
             android:textColor="#666666"/>
 
         <Spinner
@@ -52,6 +54,7 @@
         android:layout_height="wrap_content"
         android:text="+ Tambah Transaksi"
         android:textAllCaps="false"
-        android:textSize="16sp"/>
+        android:textSize="16sp"
+        android:padding="12dp"/>
 
 </LinearLayout>

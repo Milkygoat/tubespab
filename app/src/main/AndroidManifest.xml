@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     package="com.example.tugasbesar">
+
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:allowBackup="true"
-        android:dataExtractionRules="@xml/data_extraction_rules"
-        android:fullBackupContent="@xml/backup_rules"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
@@ -14,7 +13,7 @@
         android:theme="@style/Theme.Tugasbesar">
 
         <activity
-            android:name=".LoginActivity115"
+            android:name=".ui.main.MainActivity0115"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -22,8 +21,7 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".MainActivity115" />
-        <activity android:name=".AddEditActivity115" />
+        <receiver android:name=".notifications.ReminderReceiver0115" android:exported="false" />
 
     </application>
 
