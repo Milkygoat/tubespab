@@ -24,6 +24,7 @@ class LoginFragment0115 : Fragment() {
     private lateinit var passwordEditText0115: EditText
     private lateinit var loginButton0115: Button
     private lateinit var viewModel0115: AuthViewModel0115
+    private var progressDialog0115: AlertDialog? = null
     override fun onCreateView(inflater0115: LayoutInflater, container0115: ViewGroup?, savedInstanceState0115: Bundle?): View? {
         val view0115 = inflater0115.inflate(R.layout.fragment_login, container0115, false)
         emailEditText0115 = view0115.findViewById(R.id.emailEditText)
@@ -39,30 +40,32 @@ class LoginFragment0115 : Fragment() {
                 Snackbar.make(view0115, "Invalid email or password (min 6)", Snackbar.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
-            val dialog0115 = AlertDialog.Builder(requireContext()).setView(android.widget.ProgressBar(requireContext())).setCancelable(false).create()
-            dialog0115.show()
-            viewModel0115.signIn0115(email0115, pass0115)
-            viewLifecycleOwner.lifecycleScope.launch {
-                viewModel0115.authState0115.collect { auth0115 ->
-                    if (auth0115 != null) {
-                        dialog0115.dismiss()
-                        findNavController().navigate(R.id.action_login_to_tasks)
-                    }
-                }
-            }
-            viewLifecycleOwner.lifecycleScope.launch {
-                viewModel0115.errorState0115.collect { err0115 ->
-                    if (err0115 != null) {
-                        dialog0115.dismiss()
-                        Snackbar.make(view0115, err0115, Snackbar.LENGTH_LONG).show()
-                    }
-                }
-            }
+                    // show progress and trigger sign-in; collectors below will handle result
+                    progressDialog0115 = AlertDialog.Builder(requireContext()).setView(android.widget.ProgressBar(requireContext())).setCancelable(false).create()
+                    progressDialog0115?.show()
+                    viewModel0115.signIn0115(email0115, pass0115)
         }
         view0115.findViewById<View>(R.id.registerLink).setOnClickListener {
             findNavController().navigate(R.id.action_login_to_register)
         }
+        // Observers: observe auth and error states once (not per-click)
+        viewLifecycleOwner.lifecycleScope.launchWhenStarted {
+            viewModel0115.authState0115.collect { auth0115 ->
+                if (auth0115 != null) {
+                    progressDialog0115?.dismiss()
+                    findNavController().navigate(R.id.action_login_to_tasks)
+                }
+            }
+        }
+        viewLifecycleOwner.lifecycleScope.launchWhenStarted {
+            viewModel0115.errorState0115.collect { err0115 ->
+                if (err0115 != null) {
+                    progressDialog0115?.dismiss()
+                    Snackbar.make(view0115, err0115, Snackbar.LENGTH_LONG).show()
+                }
+            }
+        }
+
         return view0115
     }
 }
-
