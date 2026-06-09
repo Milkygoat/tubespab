@@ -1,15 +1,13 @@
 package com.example.tugasbesar.data.models
 
-import com.squareup.moshi.JsonClass
+import com.squareup.moshi.Json
 
-@JsonClass(generateAdapter = true)
 data class Event0115(
-    val id0115: String? = null,
-    val user_id0115: String? = null,
-    val title0115: String? = null,
-    val description0115: String? = null,
-    val location0115: String? = null,
-    val event_date0115: String? = null,
-    val created_at0115: String? = null
+    @Json(name = "id") val id0115: String? = null,
+    @Json(name = "username") val username0115: String? = null,
+    @Json(name = "title") val title0115: String? = null,
+    @Json(name = "description") val description0115: String? = null,
+    @Json(name = "location") val location0115: String? = null,
+    @Json(name = "event_date") val eventDate0115: String? = null,
+    @Json(name = "created_at") val createdAt0115: String? = null
 )
-

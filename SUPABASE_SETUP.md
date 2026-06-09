@@ -1,55 +1,57 @@
-PlanMate - Supabase & Android setup
+# PlanMate - Supabase Setup Guide
 
-Supabase credentials provided:
-- Project URL: https://jwrdrksijwphkgqmlvjt.supabase.co
-- Project ID: jwrdrksijwphkgqmlvjt
-- Anon public (publishable): eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imp3cmRya3NpandwaGtncW1sdmp0Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODA5NjY3NzksImV4cCI6MjA5NjU0Mjc3OX0.vuHDiU0hMW9aFzspTLwbp4OdLWM5vz6wSKw5ukB7JEQ
-- Service role (secret): (DO NOT USE IN CLIENT)
+## Supabase Configuration
 
-Steps to configure project locally
-1) Add BuildConfig fields in `app/build.gradle.kts` inside `defaultConfig`:
-   buildConfigField("String", "SUPABASE_URL0115", "\"https://jwrdrksijwphkgqmlvjt.supabase.co/\"")
-   buildConfigField("String", "SUPABASE_KEY0115", "\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imp3cmRya3NpandwaGtncW1sdmp0Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODA5NjY3NzksImV4cCI6MjA5NjU0Mjc3OX0.vuHDiU0hMW9aFzspTLwbp4OdLWM5vz6wSKw5ukB7JEQ\"")
+Your Supabase URL and anon key are already configured in `app/build.gradle.kts`:
 
-2) Sync Gradle in Android Studio
-3) Run the application
+    SUPABASE_URL0115 = "https://jwrdrksijwphkgqmlvjt.supabase.co/"
+    SUPABASE_KEY0115 = "eyJhbGciOiJIUzI1NiIs..."
 
-Database setup (SQL to run in Supabase SQL editor)
-- Tasks table:
-  CREATE TABLE public.tasks (
-    id uuid PRIMARY KEY DEFAULT gen_random_uuid(),
-    user_id uuid NOT NULL,
-    title text,
-    description text,
-    deadline timestamp,
-    status boolean DEFAULT false,
-    created_at timestamp DEFAULT now()
-  );
+## Database Setup
 
-- Events table:
-  CREATE TABLE public.events (
-    id uuid PRIMARY KEY DEFAULT gen_random_uuid(),
-    user_id uuid NOT NULL,
-    title text,
-    description text,
-    location text,
-    event_date timestamp,
-    created_at timestamp DEFAULT now()
-  );
+Run the following SQL in your Supabase SQL Editor (Dashboard > SQL Editor > New Query):
 
-Enable RLS and policies (recommended)
-  ALTER TABLE public.tasks ENABLE ROW LEVEL SECURITY;
-  ALTER TABLE public.events ENABLE ROW LEVEL SECURITY;
-  CREATE POLICY "users_can_manage_tasks" ON public.tasks FOR ALL USING (user_id = auth.uid()::uuid);
-  CREATE POLICY "users_can_manage_events" ON public.events FOR ALL USING (user_id = auth.uid()::uuid);
+### Step 1: Drop existing tables (if any)
 
-Security note
-- Do not put service_role (secret) key into the client app. Use it only on server-side code.
-- If secret was exposed, rotate it immediately via Supabase Dashboard -> Settings -> API -> Service role key.
+    DROP TABLE IF EXISTS public.tasks;
+    DROP TABLE IF EXISTS public.events;
 
-If you want, I can now:
-- Add the BuildConfig fields to `app/build.gradle.kts` (already done) and run a Gradle sync check
-- Implement token refresh and better error handling
-- Convert UI to Material 3 components
+### Step 2: Create new tables
 
+    CREATE TABLE public.tasks (
+        id uuid PRIMARY KEY DEFAULT gen_random_uuid(),
+        username text NOT NULL,
+        title text NOT NULL,
+        description text,
+        deadline timestamp,
+        status boolean DEFAULT false,
+        created_at timestamp DEFAULT now()
+    );
 
+    CREATE TABLE public.events (
+        id uuid PRIMARY KEY DEFAULT gen_random_uuid(),
+        username text NOT NULL,
+        title text NOT NULL,
+        description text,
+        location text,
+        event_date timestamp,
+        created_at timestamp DEFAULT now()
+    );
+
+### Step 3: Disable Row Level Security
+
+    ALTER TABLE public.tasks DISABLE ROW LEVEL SECURITY;
+    ALTER TABLE public.events DISABLE ROW LEVEL SECURITY;
+
+## How It Works
+
+- No login or registration is required
+- The app uses SharedPreferences to store the username locally
+- The username is used to filter tasks and events in the database
+- All API calls use the Supabase anon key (no user tokens)
+
+## Security Note
+
+- This setup is suitable for educational/school projects
+- For production apps, you would implement proper authentication and RLS policies
+- Do not put your service_role (secret) key in the client app

@@ -1,16 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
+        android:id="@+id/dashboardFragment0115"
+        android:icon="@drawable/ic_dashboard_0115"
+        android:title="@string/dashboard" />
+    <item
         android:id="@+id/taskListFragment0115"
-        android:icon="@android:drawable/ic_menu_agenda"
-        android:title="Tasks" />
+        android:icon="@drawable/ic_task_0115"
+        android:title="@string/tasks" />
     <item
         android:id="@+id/eventListFragment0115"
-        android:icon="@android:drawable/ic_menu_my_calendar"
-        android:title="Events" />
+        android:icon="@drawable/ic_event_0115"
+        android:title="@string/events" />
     <item
         android:id="@+id/calendarFragment0115"
-        android:icon="@android:drawable/ic_menu_month"
-        android:title="Calendar" />
+        android:icon="@drawable/ic_calendar_0115"
+        android:title="@string/calendar" />
 </menu>
-

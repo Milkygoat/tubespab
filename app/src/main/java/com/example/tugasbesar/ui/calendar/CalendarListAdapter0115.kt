@@ -1,38 +1,42 @@
 package com.example.tugasbesar.ui.calendar
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.tugasbesar.R
-import com.example.tugasbesar.data.models.Event0115
-import com.example.tugasbesar.data.models.Task0115
+import com.example.tugasbesar.data.models.CalendarEntry0115
+import com.example.tugasbesar.databinding.ItemCalendarEntryBinding
 
-class CalendarListAdapter0115 : RecyclerView.Adapter<CalendarListAdapter0115.VH0115>() {
-    private var items0115: List<Any> = emptyList()
-    fun submitList0115(list0115: List<Any>) {
-        items0115 = list0115
+class CalendarListAdapter0115 : RecyclerView.Adapter<CalendarListAdapter0115.EntryViewHolder0115>() {
+
+    private var entries0115: List<CalendarEntry0115> = emptyList()
+
+    fun submitList0115(list0115: List<CalendarEntry0115>) {
+        entries0115 = list0115
         notifyDataSetChanged()
     }
-    override fun onCreateViewHolder(parent0115: ViewGroup, viewType0115: Int): VH0115 {
-        val v0115 = LayoutInflater.from(parent0115.context).inflate(R.layout.item_calendar_entry, parent0115, false)
-        return VH0115(v0115)
-    }
-    override fun onBindViewHolder(holder0115: VH0115, position0115: Int) {
-        val obj0115 = items0115[position0115]
-        if (obj0115 is Task0115) {
-            holder0115.title0115.text = obj0115.title0115 ?: ""
-            holder0115.subtitle0115.text = obj0115.deadline0115 ?: ""
-        } else if (obj0115 is Event0115) {
-            holder0115.title0115.text = obj0115.title0115 ?: ""
-            holder0115.subtitle0115.text = obj0115.event_date0115 ?: ""
+
+    inner class EntryViewHolder0115(private val binding0115: ItemCalendarEntryBinding) : RecyclerView.ViewHolder(binding0115.root) {
+        fun bind0115(entry0115: CalendarEntry0115) {
+            binding0115.textEntryTitle0115.text = entry0115.title0115
+            binding0115.textEntrySubtitle0115.text = entry0115.subtitle0115
+            binding0115.chipType0115.text = entry0115.type0115
+            if (entry0115.type0115 == "Task") {
+                binding0115.chipType0115.setChipBackgroundColorResource(R.color.md_theme_light_primaryContainer)
+            } else {
+                binding0115.chipType0115.setChipBackgroundColorResource(R.color.md_theme_light_tertiaryContainer)
+            }
         }
     }
-    override fun getItemCount(): Int = items0115.size
-    class VH0115(itemView0115: View) : RecyclerView.ViewHolder(itemView0115) {
-        val title0115: TextView = itemView0115.findViewById(R.id.calendarItemTitle)
-        val subtitle0115: TextView = itemView0115.findViewById(R.id.calendarItemSubtitle)
-    }
-}
 
+    override fun onCreateViewHolder(parent0115: ViewGroup, viewType0115: Int): EntryViewHolder0115 {
+        val binding0115 = ItemCalendarEntryBinding.inflate(LayoutInflater.from(parent0115.context), parent0115, false)
+        return EntryViewHolder0115(binding0115)
+    }
+
+    override fun onBindViewHolder(holder0115: EntryViewHolder0115, position0115: Int) {
+        holder0115.bind0115(entries0115[position0115])
+    }
+
+    override fun getItemCount(): Int = entries0115.size
+}

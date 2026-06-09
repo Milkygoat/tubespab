@@ -1,43 +1,63 @@
 package com.example.tugasbesar.ui.tasks
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
-import androidx.recyclerview.widget.DiffUtil
-import androidx.recyclerview.widget.ListAdapter
+import android.graphics.Paint
 import androidx.recyclerview.widget.RecyclerView
 import com.example.tugasbesar.data.models.Task0115
-import com.example.tugasbesar.R
+import com.example.tugasbesar.databinding.ItemTaskBinding
+import java.text.SimpleDateFormat
+import java.util.Locale
 
-class TaskAdapter0115(private val onClick0115: (Task0115) -> Unit) : ListAdapter<Task0115, TaskAdapter0115.TaskViewHolder0115>(Diff0115()) {
-    override fun onCreateViewHolder(parent0115: ViewGroup, viewType0115: Int): TaskViewHolder0115 {
-        val view0115 = LayoutInflater.from(parent0115.context).inflate(R.layout.item_task, parent0115, false)
-        return TaskViewHolder0115(view0115, onClick0115)
+class TaskAdapter0115(
+    private val onItemClick0115: (Task0115) -> Unit,
+    private val onCheckChange0115: (Task0115) -> Unit
+) : RecyclerView.Adapter<TaskAdapter0115.TaskViewHolder0115>() {
+
+    private var taskList0115: List<Task0115> = emptyList()
+
+    fun submitList0115(list0115: List<Task0115>) {
+        taskList0115 = list0115
+        notifyDataSetChanged()
     }
-    override fun onBindViewHolder(holder0115: TaskViewHolder0115, position0115: Int) {
-        holder0115.bind0115(getItem(position0115))
-    }
-    class TaskViewHolder0115(itemView0115: View, val onClick0115: (Task0115) -> Unit) : RecyclerView.ViewHolder(itemView0115) {
-        private val title0115: TextView = itemView0115.findViewById(R.id.titleTextView)
-        private val desc0115: TextView = itemView0115.findViewById(R.id.descTextView)
-        private val deadline0115: TextView = itemView0115.findViewById(R.id.deadlineTextView)
-        private var current0115: Task0115? = null
-        init {
-            itemView0115.setOnClickListener {
-                current0115?.let { onClick0115(it) }
+
+    inner class TaskViewHolder0115(private val binding0115: ItemTaskBinding) : RecyclerView.ViewHolder(binding0115.root) {
+        fun bind0115(task0115: Task0115) {
+            binding0115.textTaskTitle0115.text = task0115.title0115 ?: ""
+            binding0115.textTaskDescription0115.text = task0115.description0115 ?: ""
+            binding0115.textTaskDeadline0115.text = formatDate0115(task0115.deadline0115)
+            val isCompleted0115 = task0115.status0115 ?: false
+            binding0115.checkboxStatus0115.isChecked = isCompleted0115
+            if (isCompleted0115) {
+                binding0115.textTaskTitle0115.paintFlags = binding0115.textTaskTitle0115.paintFlags or Paint.STRIKE_THRU_TEXT_FLAG
+            } else {
+                binding0115.textTaskTitle0115.paintFlags = binding0115.textTaskTitle0115.paintFlags and Paint.STRIKE_THRU_TEXT_FLAG.inv()
             }
-        }
-        fun bind0115(item0115: Task0115) {
-            current0115 = item0115
-            title0115.text = item0115.title0115 ?: ""
-            desc0115.text = item0115.description0115 ?: ""
-            deadline0115.text = item0115.deadline0115 ?: ""
+            binding0115.checkboxStatus0115.setOnClickListener { onCheckChange0115(task0115) }
+            binding0115.root.setOnClickListener { onItemClick0115(task0115) }
         }
     }
-    class Diff0115 : DiffUtil.ItemCallback<Task0115>() {
-        override fun areItemsTheSame(oldItem0115: Task0115, newItem0115: Task0115): Boolean = oldItem0115.id0115 == newItem0115.id0115
-        override fun areContentsTheSame(oldItem0115: Task0115, newItem0115: Task0115): Boolean = oldItem0115 == newItem0115
+
+    override fun onCreateViewHolder(parent0115: ViewGroup, viewType0115: Int): TaskViewHolder0115 {
+        val binding0115 = ItemTaskBinding.inflate(LayoutInflater.from(parent0115.context), parent0115, false)
+        return TaskViewHolder0115(binding0115)
+    }
+
+    override fun onBindViewHolder(holder0115: TaskViewHolder0115, position0115: Int) {
+        holder0115.bind0115(taskList0115[position0115])
+    }
+
+    override fun getItemCount(): Int = taskList0115.size
+
+    private fun formatDate0115(dateStr0115: String?): String {
+        if (dateStr0115.isNullOrEmpty()) return ""
+        return try {
+            val inputFormat0115 = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss", Locale.getDefault())
+            val outputFormat0115 = SimpleDateFormat("MMM dd, yyyy HH:mm", Locale.getDefault())
+            val date0115 = inputFormat0115.parse(dateStr0115)
+            if (date0115 != null) outputFormat0115.format(date0115) else dateStr0115
+        } catch (e0115: Exception) {
+            dateStr0115 ?: ""
+        }
     }
 }
-

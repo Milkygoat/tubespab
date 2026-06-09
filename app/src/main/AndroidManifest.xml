@@ -3,6 +3,9 @@
     package="com.example.tugasbesar">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+    <uses-permission android:name="android.permission.SCHEDULE_EXACT_ALARM" />
+    <uses-permission android:name="android.permission.USE_EXACT_ALARM" />
 
     <application
         android:allowBackup="true"
@@ -13,7 +16,7 @@
         android:theme="@style/Theme.Tugasbesar">
 
         <activity
-            android:name=".ui.main.MainActivity0115"
+            android:name=".ui.welcome.WelcomeActivity0115"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -21,7 +24,13 @@
             </intent-filter>
         </activity>
 
-        <receiver android:name=".notifications.ReminderReceiver0115" android:exported="false" />
+        <activity
+            android:name=".ui.main.MainActivity0115"
+            android:exported="false" />
+
+        <receiver
+            android:name=".notifications.ReminderReceiver0115"
+            android:exported="false" />
 
     </application>
 
