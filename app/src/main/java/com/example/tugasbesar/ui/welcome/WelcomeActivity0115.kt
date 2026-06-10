@@ -12,11 +12,15 @@ class WelcomeActivity0115 : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState0115: Bundle?) {
         super.onCreate(savedInstanceState0115)
+        
+        val isAddingProfile = intent.getBooleanExtra("is_adding_profile", false)
         val existingName0115 = PreferencesHelper0115.getUsername0115(this)
-        if (!existingName0115.isNullOrBlank()) {
+        
+        if (!isAddingProfile && !existingName0115.isNullOrBlank()) {
             startMainActivity0115()
             return
         }
+        
         binding0115 = ActivityWelcomeBinding.inflate(layoutInflater)
         setContentView(binding0115.root)
         binding0115.btnGetStarted0115.setOnClickListener {

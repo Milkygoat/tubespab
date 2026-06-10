@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item>
+        <shape android:shape="rectangle">
+            <gradient
+                android:angle="135"
+                android:startColor="#48CAE4"
+                android:centerColor="#00B4D8"
+                android:endColor="#0077B6"
+                android:type="linear" />
+        </shape>
+    </item>
+    <!-- Subtle wave overlay effect at the bottom -->
+    <item
+        android:top="250dp">
+        <shape android:shape="rectangle">
+            <corners
+                android:bottomLeftRadius="48dp"
+                android:bottomRightRadius="48dp" />
+            <solid android:color="#100077B6" />
+        </shape>
+    </item>
+</layer-list>

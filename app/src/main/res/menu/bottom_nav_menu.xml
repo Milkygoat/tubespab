@@ -16,4 +16,8 @@
         android:id="@+id/calendarFragment0115"
         android:icon="@drawable/ic_calendar_0115"
         android:title="@string/calendar" />
+    <item
+        android:id="@+id/profileFragment0115"
+        android:icon="@drawable/ic_profile_0115"
+        android:title="@string/profile" />
 </menu>

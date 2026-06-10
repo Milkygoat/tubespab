@@ -84,4 +84,9 @@
         android:name="com.example.tugasbesar.ui.calendar.CalendarFragment0115"
         android:label="@string/calendar" />
 
+    <fragment
+        android:id="@+id/profileFragment0115"
+        android:name="com.example.tugasbesar.ui.profile.ProfileFragment0115"
+        android:label="@string/profile" />
+
 </navigation>

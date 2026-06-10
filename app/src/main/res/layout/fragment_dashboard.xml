@@ -29,6 +29,13 @@
                 android:padding="24dp">
 
                 <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="👋"
+                    android:textSize="28sp"
+                    android:layout_marginBottom="4dp" />
+
+                <TextView
                     android:id="@+id/text_greeting_0115"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -43,7 +50,7 @@
                     android:layout_marginTop="6dp"
                     android:text="@string/productivity_overview"
                     android:textAppearance="?attr/textAppearanceBodyLarge"
-                    android:textColor="#E0E0FF"
+                    android:textColor="#CCE5F5FF"
                     android:fontFamily="sans-serif" />
             </LinearLayout>
         </FrameLayout>
@@ -62,9 +69,9 @@
                 android:layout_weight="1"
                 android:layout_marginEnd="10dp"
                 app:cardCornerRadius="20dp"
-                app:cardElevation="6dp"
+                app:cardElevation="4dp"
                 app:strokeWidth="0dp"
-                app:cardBackgroundColor="?attr/colorSurfaceVariant">
+                app:cardBackgroundColor="@color/card_stat_bg_1">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -72,6 +79,13 @@
                     android:gravity="center"
                     android:orientation="vertical"
                     android:padding="24dp">
+
+                    <!-- Small icon indicator -->
+                    <View
+                        android:layout_width="8dp"
+                        android:layout_height="8dp"
+                        android:layout_marginBottom="12dp"
+                        android:background="@drawable/bg_dot_primary" />
 
                     <TextView
                         android:id="@+id/text_task_count_0115"
@@ -100,9 +114,9 @@
                 android:layout_weight="1"
                 android:layout_marginStart="10dp"
                 app:cardCornerRadius="20dp"
-                app:cardElevation="6dp"
+                app:cardElevation="4dp"
                 app:strokeWidth="0dp"
-                app:cardBackgroundColor="?attr/colorTertiaryContainer">
+                app:cardBackgroundColor="@color/card_stat_bg_2">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -110,6 +124,13 @@
                     android:gravity="center"
                     android:orientation="vertical"
                     android:padding="24dp">
+
+                    <!-- Small icon indicator -->
+                    <View
+                        android:layout_width="8dp"
+                        android:layout_height="8dp"
+                        android:layout_marginBottom="12dp"
+                        android:background="@drawable/bg_dot_tertiary" />
 
                     <TextView
                         android:id="@+id/text_event_count_0115"
@@ -127,7 +148,7 @@
                         android:layout_marginTop="8dp"
                         android:text="@string/upcoming_events"
                         android:textAppearance="?attr/textAppearanceTitleSmall"
-                        android:textColor="?attr/colorOnTertiaryContainer"
+                        android:textColor="?attr/colorOnSurfaceVariant"
                         android:fontFamily="sans-serif-medium" />
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
@@ -148,34 +169,49 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="24dp"
-            app:cardCornerRadius="16dp"
-            app:cardElevation="2dp"
+            app:cardCornerRadius="20dp"
+            app:cardElevation="3dp"
             app:strokeWidth="0dp"
-            app:cardBackgroundColor="?attr/colorSurface">
+            app:cardBackgroundColor="@color/card_task_accent">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
                 android:padding="20dp">
 
-                <TextView
-                    android:id="@+id/text_nearest_task_title_0115"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/no_upcoming_tasks"
-                    android:textAppearance="?attr/textAppearanceTitleMedium"
-                    android:textColor="?attr/colorOnSurface"
-                    android:fontFamily="sans-serif-medium" />
+                <!-- Blue accent bar -->
+                <View
+                    android:layout_width="4dp"
+                    android:layout_height="44dp"
+                    android:layout_marginEnd="16dp"
+                    android:background="@drawable/bg_accent_bar_primary" />
 
-                <TextView
-                    android:id="@+id/text_nearest_task_deadline_0115"
-                    android:layout_width="wrap_content"
+                <LinearLayout
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:textAppearance="?attr/textAppearanceBodyMedium"
-                    android:textColor="?attr/colorOnSurfaceVariant"
-                    android:fontFamily="sans-serif" />
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/text_nearest_task_title_0115"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/no_upcoming_tasks"
+                        android:textAppearance="?attr/textAppearanceTitleMedium"
+                        android:textColor="?attr/colorOnSurface"
+                        android:fontFamily="sans-serif-medium" />
+
+                    <TextView
+                        android:id="@+id/text_nearest_task_deadline_0115"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="6dp"
+                        android:textAppearance="?attr/textAppearanceBodyMedium"
+                        android:textColor="?attr/colorPrimary"
+                        android:fontFamily="sans-serif" />
+                </LinearLayout>
             </LinearLayout>
         </com.google.android.material.card.MaterialCardView>
 
@@ -194,43 +230,58 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="24dp"
-            app:cardCornerRadius="16dp"
-            app:cardElevation="2dp"
+            app:cardCornerRadius="20dp"
+            app:cardElevation="3dp"
             app:strokeWidth="0dp"
-            app:cardBackgroundColor="?attr/colorSurface">
+            app:cardBackgroundColor="@color/card_event_accent">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
                 android:padding="20dp">
 
-                <TextView
-                    android:id="@+id/text_nearest_event_title_0115"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/no_upcoming_events"
-                    android:textAppearance="?attr/textAppearanceTitleMedium"
-                    android:textColor="?attr/colorOnSurface"
-                    android:fontFamily="sans-serif-medium" />
+                <!-- Teal accent bar -->
+                <View
+                    android:layout_width="4dp"
+                    android:layout_height="44dp"
+                    android:layout_marginEnd="16dp"
+                    android:background="@drawable/bg_accent_bar_tertiary" />
 
-                <TextView
-                    android:id="@+id/text_nearest_event_date_0115"
-                    android:layout_width="wrap_content"
+                <LinearLayout
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:textAppearance="?attr/textAppearanceBodyMedium"
-                    android:textColor="?attr/colorOnSurfaceVariant"
-                    android:fontFamily="sans-serif" />
+                    android:layout_weight="1"
+                    android:orientation="vertical">
 
-                <TextView
-                    android:id="@+id/text_nearest_event_location_0115"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="4dp"
-                    android:textAppearance="?attr/textAppearanceBodySmall"
-                    android:textColor="?attr/colorOnSurfaceVariant"
-                    android:fontFamily="sans-serif" />
+                    <TextView
+                        android:id="@+id/text_nearest_event_title_0115"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/no_upcoming_events"
+                        android:textAppearance="?attr/textAppearanceTitleMedium"
+                        android:textColor="?attr/colorOnSurface"
+                        android:fontFamily="sans-serif-medium" />
+
+                    <TextView
+                        android:id="@+id/text_nearest_event_date_0115"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="6dp"
+                        android:textAppearance="?attr/textAppearanceBodyMedium"
+                        android:textColor="?attr/colorTertiary"
+                        android:fontFamily="sans-serif" />
+
+                    <TextView
+                        android:id="@+id/text_nearest_event_location_0115"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="2dp"
+                        android:textAppearance="?attr/textAppearanceBodySmall"
+                        android:textColor="?attr/colorOnSurfaceVariant"
+                        android:fontFamily="sans-serif" />
+                </LinearLayout>
             </LinearLayout>
         </com.google.android.material.card.MaterialCardView>
 
